@@ -1,20 +1,22 @@
-const accumulator = (reducer, init) => {
+const scan = (reducer, init) => {
   const state = {
-    currentValue: init,
-    target: init
+    accumulator: init,
+    reducer: reducer,
+    listener: () => {}
   };
 
-  const next = listener => {
-    state.currentValue = reducer(state.currentValue, state.target);
-    listener(state.currentValue);
+  const next = v => {
+    state.accumulator = reducer(state.accumulator, v);
+    state.listener(state.accumulator);
   };
 
-  const update = v => (state.target = v);
+  const start = listener => {
+    state.listener = listener;
 
-  return {
-    next,
-    update
+    return { next };
   };
+
+  return { start };
 };
 
-export default accumulator;
+export default scan;

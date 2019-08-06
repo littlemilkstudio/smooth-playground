@@ -1,18 +1,21 @@
 /* .App {
   height: 10
 } */
+.App {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 
 .mouse {
   --x: calc(var(--mouse-x) * 1px);
   --y: calc(var(--mouse-y) * 1px);
-  --vx: calc(1 + var(--mouse-v));
-  --vy: calc(1 / 1 - var(--mouse-v));
-  --r: calc(var(--mouse-r) * 1deg);
   position: absolute;
-  background-color: tomato;
-  /* border: 2px solid black; */
+  border: 2px solid black;
   border-radius: 99999px;
   height: 50px;
   width: 50px;
-  transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 50%), 0) rotate(var(--r)) scale(var(--vx), var(--vy));
+  transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 50%), 0);
 }

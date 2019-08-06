@@ -2,9 +2,9 @@ import raf from "../raf";
 import accumulator from "../accumulator";
 import linearInterpolation from "../lerp";
 
-const lerp = init => {
+const smooth = init => {
   const state = {
-    accumulator: accumulator(linearInterpolation(0.4), init),
+    accumulator: accumulator(linearInterpolation(0.1), init),
     raf: raf()
   };
 
@@ -24,4 +24,4 @@ const lerp = init => {
   };
 };
 
-export default lerp;
+export default smooth;
