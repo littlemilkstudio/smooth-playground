@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import pointer from "./events/pointer";
+import smooth from "./smooth";
+import value from "./value";
+import "./App.css";
 
 function App() {
+  useEffect(() => {
+    const val = value({ x: 0, y: 0 }).start(
+      ({ current, velocity, rotation }) => {
+        let styleString = "";
+        const keys = Object.keys(current);
+        keys.forEach(key => {
+          styleString += `--mouse-${key}: ${current[key]};`;
+        });
+
+        styleString += `--mouse-v:${Math.min(
+          Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.y, 2)),
+          0.8
+        )};`;
+
+        styleString += `--mouse-r:${rotation}`;
+
+        document.body.style.cssText = styleString;
+      }
+    );
+
+    const s = smooth({ x: 0, y: 0 }).start(v => {
+      val.update(v);
+    });
+
+    pointer().start(v => s.update(v));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="mouse" />
     </div>
   );
 }
