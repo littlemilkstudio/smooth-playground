@@ -17,7 +17,7 @@ const rAF = () => {
 
   const start = listener => {
     state.listener = listener;
-    loop(Date.now());
+    loop();
 
     return { stop };
   };

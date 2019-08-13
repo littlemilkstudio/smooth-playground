@@ -13,9 +13,9 @@
   --x: calc(var(--mouse-x) * 1px);
   --y: calc(var(--mouse-y) * 1px);
   position: absolute;
-  border: 2px solid black;
+  border: 2px solid tomato;
   border-radius: 99999px;
-  height: 50px;
-  width: 50px;
+  height: 25px;
+  width: 25px;
   transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 50%), 0);
 }
